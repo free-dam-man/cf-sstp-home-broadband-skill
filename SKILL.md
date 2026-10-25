@@ -23,7 +23,7 @@ China 5G **全部 Timeout** is usually **stale Cloudflare preferred entry IPs**,
 
 1. Bind Workers KV as `ENTRIES_KV`; enable Worker cron `0 0 * * *` UTC (= **08:00 Asia/Shanghai**).
 2. Soft refresh: Worker `scheduled` pulls a community preferred-IP list when KV is older than ~20h.
-3. Hard refresh (recommended after a China probe): `PUT /entries-<YOUR_SUB_TOKEN>` with `{"entries":["ip:port",...]}` or run `scripts/refresh_sstp_entries.py` with `SSTP_HOST` / `SSTP_SUB_TOKEN` env vars.
+3. Hard refresh (recommended after a China probe): `PUT /entries-<YOUR_SUB_TOKEN>` with `{"entries":["ip:port",...]}` or run `scripts/refresh_sstp_entries.py` with `SSTP_HOST` / `SSTP_SUB_TOKEN`. Prefer `PINNED.after.txt` over `PINNED.txt` (set `SSTP_PINNED_DIR` to auto-pick `daily-*/PINNED.after.txt` first).
 4. Clients keep the same `https://<YOUR_CUSTOM_DOMAIN>/sub-<YOUR_SUB_TOKEN>` URL and only pull-to-refresh.
 5. Confirm via `/json-<YOUR_SUB_TOKEN>` → `entriesMeta.source=kv`.
 

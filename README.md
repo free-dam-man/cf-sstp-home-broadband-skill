@@ -33,7 +33,7 @@ Do **not** mistake this for production-grade always-on. See also [`STABILITY.md`
 
 China 5G **全部 Timeout** is usually **stale Cloudflare preferred entry IPs**, not a dead SSTP pool.
 
-This Worker stores preferred `ip:port` pairs in **KV**, rotates them in `buildSub`, and can soft-refresh on a daily cron (**~08:00 Asia/Shanghai**). You can also hard-refresh from a China-verified PINNED list. **The subscription URL never changes** — clients only pull-to-refresh.
+This Worker stores preferred `ip:port` pairs in **KV**, rotates them in `buildSub`, and can soft-refresh on a daily cron (**~08:00 Asia/Shanghai**). Hard-refresh from a China-verified PINNED list: **prefer `PINNED.after.txt` (post China-probe) over `PINNED.txt`**. **The subscription URL never changes** — clients only pull-to-refresh. Each deployer's Worker cron + KV is independent.
 
 Full write-up: [`AUTO_REFRESH.md`](AUTO_REFRESH.md) · helper: `scripts/refresh_sstp_entries.py`
 
